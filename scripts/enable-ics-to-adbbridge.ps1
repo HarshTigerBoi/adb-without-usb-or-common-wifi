@@ -60,7 +60,7 @@ Write-Host "Sharing internet from '$PublicAdapter' to '$PrivateAdapter'."
 $publicConfig = $share.INetSharingConfigurationForINetConnection($publicConnection)
 $privateConfig = $share.INetSharingConfigurationForINetConnection($privateConnection)
 
-# 0 = public/shared internet adapter, 1 = private/home adapter.
+# 0 = public internet adapter, 1 = private/home adapter.
 $publicConfig.EnableSharing(0)
 $privateConfig.EnableSharing(1)
 
@@ -70,4 +70,3 @@ Get-NetIPAddress -AddressFamily IPv4 -ErrorAction SilentlyContinue |
   Where-Object { $_.InterfaceAlias -in $PublicAdapter,$PrivateAdapter -or $_.IPAddress -like '192.168.137.*' } |
   Sort-Object InterfaceAlias,IPAddress |
   Format-Table -AutoSize InterfaceAlias,IPAddress,PrefixLength
-

@@ -1,13 +1,16 @@
+param(
+  [string]$Ssid = $env:ADB_BRIDGE_SSID,
+  [string]$Password = $env:ADB_BRIDGE_PASSWORD
+)
+
 $ErrorActionPreference = 'Stop'
 
-$ssid = $env:ADB_BRIDGE_SSID
-if (-not $ssid) {
-  $ssid = 'ADBBridge'
+if (-not $Ssid) {
+  $Ssid = 'ADBBridge'
 }
 
-$password = $env:ADB_BRIDGE_PASSWORD
-if (-not $password) {
-  $password = 'ChangeMe123!'
+if (-not $Password) {
+  $Password = 'ChangeMe123!'
 }
 
 Add-Type -AssemblyName System.Runtime.WindowsRuntime
@@ -17,15 +20,15 @@ $null = [Windows.Security.Credentials.PasswordCredential, Windows.Security.Crede
 $publisher = [Windows.Devices.WiFiDirect.WiFiDirectAdvertisementPublisher]::new()
 $publisher.Advertisement.IsAutonomousGroupOwnerEnabled = $true
 $publisher.Advertisement.LegacySettings.IsEnabled = $true
-$publisher.Advertisement.LegacySettings.Ssid = $ssid
+$publisher.Advertisement.LegacySettings.Ssid = $Ssid
 
 $credential = [Windows.Security.Credentials.PasswordCredential]::new()
-$credential.Password = $password
+$credential.Password = $Password
 $publisher.Advertisement.LegacySettings.Passphrase = $credential
 
 Write-Host 'Starting Wi-Fi Direct Legacy AP...'
-Write-Host "SSID: $ssid"
-Write-Host "Password: $password"
+Write-Host "SSID: $Ssid"
+Write-Host "Password: $Password"
 $publisher.Start()
 Start-Sleep -Seconds 3
 Write-Host "Publisher status: $($publisher.Status)"
@@ -46,4 +49,3 @@ while ($true) {
 
   Start-Sleep -Seconds 10
 }
-

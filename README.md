@@ -1,6 +1,36 @@
-# Android Wireless ADB Without USB or a Shared Wi-Fi Router
+# Android Wireless ADB Without USB or a Common Wi-Fi Router
 
-Use Android `adb install`, `adb shell`, and `logcat` when you **do not have a usable USB data cable** and **do not have a common Wi-Fi/router** for both devices.
+Use Android `adb install`, `adb shell`, `adb logcat`, Android Studio, scrcpy, or any other ADB-based workflow when you **do not have a usable USB data cable** and **do not have a common Wi-Fi router** for both devices.
+
+## Start Here
+
+Download or clone this repo on a Windows laptop, then use one of these:
+
+```text
+Double-click START_HERE.cmd
+```
+
+or run:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\run-adb-rescue-wizard.ps1
+```
+
+To install an APK at the end, drag the APK file onto `START_HERE.cmd`, or run:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\run-adb-rescue-wizard.ps1 -ApkPath "C:\path\to\app.apk"
+```
+
+The wizard handles the laptop side and pauses for the few phone taps Android requires:
+
+1. Download/find ADB.
+2. Start a laptop-created Wi-Fi Direct network.
+3. Tell you what Wi-Fi to join from the phone.
+4. Help pair Android Wireless debugging.
+5. Connect ADB.
+6. Optionally switch to TCP `5555` for easier reconnects.
+7. Optionally install an APK.
 
 The setup uses only what many people already have:
 
@@ -11,6 +41,8 @@ The setup uses only what many people already have:
 
 After the first Wireless ADB connection works, the phone can be switched to classic TCP ADB on port `5555` for easier reconnects.
 
+Once `adb devices` shows the phone as `device`, the connection is normal ADB. Any tool that uses ADB can use it.
+
 ## Core Idea
 
 Android Wireless debugging needs a network path. Usually that means both devices are on the same home/router Wi-Fi. If you do not have that, Windows can create a local Wi-Fi Direct Legacy AP. The phone joins that AP, the laptop pairs with Android Wireless debugging, and then ADB works without USB data.
@@ -18,7 +50,7 @@ Android Wireless debugging needs a network path. Usually that means both devices
 This is best described as:
 
 ```text
-ADB without USB cable/data and without a shared Wi-Fi router.
+ADB without USB cable/data and without a common Wi-Fi router.
 ```
 
 It is not literally "ADB without Wi-Fi"; it creates a tiny local Wi-Fi network from the laptop.
@@ -43,7 +75,7 @@ Important wording: this is **not ADB without any Wi-Fi radio at all**. ADB still
 - You do not want to use a USB cable.
 - You have no USB data cable, only charging cables.
 - Your phone's USB data path is broken, flaky, or inconvenient.
-- You do not have a common Wi-Fi network/router for both laptop and phone.
+- You do not have a common Wi-Fi router for both laptop and phone.
 - The laptop is using the phone hotspot for internet, so the phone is the hotspot host instead of a normal Wi-Fi client.
 - Wireless debugging pairs but `adb connect` fails because the phone does not expose a reachable connect port.
 
@@ -69,25 +101,6 @@ Also useful when Windows shows USB errors such as:
 - The laptop and phone must have at least one reachable local network path.
 
 This bypasses USB data by using Wireless ADB. It can help whether USB is broken, unavailable, or simply not desired.
-
-## Fast Path for Future Codex Chats
-
-Paste this into another Codex chat:
-
-```text
-I have a Windows laptop and an Android phone. I want ADB without USB cable/data and without a shared Wi-Fi router. Wireless ADB was previously made to work by creating a Windows Wi-Fi Direct Legacy AP, pairing Android Wireless debugging, then switching ADB to TCP port 5555.
-
-Please first check:
-.\work\android\platform-tools\adb.exe devices -l
-
-If the phone is not connected, reconnect with:
-.\work\android\platform-tools\adb.exe connect <PHONE_HOTSPOT_GATEWAY_OR_PHONE_IP>:5555
-
-Do not disconnect the laptop from the phone hotspot unless I explicitly say it is okay. If :5555 is not listening, use the full rescue flow from README.md: start the Wi-Fi Direct AP, enable ICS, pair Wireless debugging, connect to the discovered _adb-tls-connect endpoint, then run adb tcpip 5555.
-
-To install my APK, run:
-.\work\android\platform-tools\adb.exe -s <ADB_SERIAL> install -r "C:\path\to\app.apk"
-```
 
 ## Value Decoder: What Each Placeholder Means
 
