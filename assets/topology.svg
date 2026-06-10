@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="680" viewBox="0 0 1100 680" role="img" aria-labelledby="title desc">
+  <title id="title">Wireless ADB rescue network topology</title>
+  <desc id="desc">Diagram showing a phone hotspot, Windows laptop, Wi-Fi Direct AP, phone Wi-Fi client path, and ADB pairing and connect routes.</desc>
+  <rect width="1100" height="680" fill="#0b1020"/>
+
+  <rect x="70" y="90" width="280" height="180" rx="22" fill="#111827" stroke="#38bdf8" stroke-width="3"/>
+  <text x="112" y="150" fill="#e0f2fe" font-family="Arial, sans-serif" font-size="32">Android Phone</text>
+  <text x="112" y="198" fill="#bae6fd" font-family="Arial, sans-serif" font-size="22">Hotspot gateway</text>
+  <text x="112" y="232" fill="#f8fafc" font-family="Arial, sans-serif" font-size="24">&lt;PHONE_HOTSPOT_GATEWAY&gt;</text>
+
+  <rect x="730" y="90" width="300" height="180" rx="22" fill="#111827" stroke="#a78bfa" stroke-width="3"/>
+  <text x="786" y="150" fill="#ede9fe" font-family="Arial, sans-serif" font-size="32">Windows Laptop</text>
+  <text x="786" y="198" fill="#ddd6fe" font-family="Arial, sans-serif" font-size="22">Connected to phone hotspot</text>
+  <text x="786" y="232" fill="#f8fafc" font-family="Arial, sans-serif" font-size="24">&lt;LAPTOP_WIFI_IP&gt;</text>
+
+  <rect x="410" y="365" width="300" height="190" rx="22" fill="#111827" stroke="#34d399" stroke-width="3"/>
+  <text x="456" y="425" fill="#d1fae5" font-family="Arial, sans-serif" font-size="32">Wi-Fi Direct AP</text>
+  <text x="456" y="474" fill="#a7f3d0" font-family="Arial, sans-serif" font-size="22">SSID: ADBBridge</text>
+  <text x="456" y="508" fill="#f8fafc" font-family="Arial, sans-serif" font-size="24">AP IP: 192.168.137.1</text>
+
+  <path d="M350 180 L730 180" stroke="#38bdf8" stroke-width="6" fill="none"/>
+  <polygon points="730,180 702,164 702,196" fill="#38bdf8"/>
+  <text x="430" y="150" fill="#bae6fd" font-family="Arial, sans-serif" font-size="23">laptop internet path</text>
+
+  <path d="M730 250 C650 330 630 350 620 365" stroke="#34d399" stroke-width="6" fill="none"/>
+  <polygon points="620,365 621,333 646,352" fill="#34d399"/>
+  <text x="690" y="335" fill="#a7f3d0" font-family="Arial, sans-serif" font-size="23">creates AP</text>
+
+  <path d="M190 270 C250 410 335 460 410 460" stroke="#34d399" stroke-width="6" fill="none"/>
+  <polygon points="410,460 379,447 382,479" fill="#34d399"/>
+  <text x="108" y="374" fill="#a7f3d0" font-family="Arial, sans-serif" font-size="23">phone joins ADBBridge</text>
+
+  <rect x="86" y="410" width="260" height="116" rx="18" fill="#172554" stroke="#60a5fa" stroke-width="2"/>
+  <text x="112" y="455" fill="#dbeafe" font-family="Arial, sans-serif" font-size="23">Phone client IP</text>
+  <text x="112" y="493" fill="#f8fafc" font-family="Arial, sans-serif" font-size="24">&lt;CONNECT_IP&gt;</text>
+
+  <path d="M710 465 C830 445 900 350 900 270" stroke="#ffcc33" stroke-width="6" fill="none" stroke-dasharray="14 10"/>
+  <polygon points="900,270 884,298 916,298" fill="#ffcc33"/>
+  <text x="754" y="424" fill="#fff7d6" font-family="Arial, sans-serif" font-size="23">ADB connect route</text>
+
+  <rect x="760" y="420" width="286" height="120" rx="18" fill="#3b2f00" stroke="#ffcc33" stroke-width="2"/>
+  <text x="790" y="462" fill="#fff7d6" font-family="Arial, sans-serif" font-size="22">After pairing:</text>
+  <text x="790" y="500" fill="#ffffff" font-family="Arial, sans-serif" font-size="24">adb connect &lt;CONNECT_IP&gt;:&lt;PORT&gt;</text>
+</svg>

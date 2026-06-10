@@ -21,11 +21,14 @@ If :5555 is not listening, follow the repo README:
 2. Enable ICS with scripts\enable-ics-to-adbbridge.ps1.
 3. Connect the phone Wi-Fi to ADBBridge.
 4. In phone Wireless debugging, forget stale paired devices.
-5. Pair with adb pair <PAIRING_IP>:<PAIR_PORT> <CODE>.
-6. Connect to the discovered _adb-tls-connect endpoint.
-7. Run adb tcpip 5555.
-8. Reconnect on <PHONE_IP_OR_GATEWAY>:5555.
-9. Install the APK.
+5. If the phone shows "Pair device with pairing code", use that popup only for adb pair:
+   adb pair <PAIRING_IP>:<PAIR_PORT> <SIX_DIGIT_CODE>
+6. Do not use the pairing port with adb connect.
+7. Close the pairing popup and use the main Wireless debugging "IP address and port" line, or use the discovered _adb-tls-connect endpoint:
+   adb connect <CONNECT_IP>:<CONNECT_PORT>
+8. Run adb tcpip 5555.
+9. Reconnect on <PHONE_IP_OR_GATEWAY>:5555.
+10. Install the APK.
 ```
 
 Minimum things that must be true:
@@ -34,4 +37,4 @@ Minimum things that must be true:
 - The phone and laptop can reach each other on at least one local network.
 - `adb.exe` from Android platform-tools exists.
 - The phone shows as `device`, not `offline`, before installing.
-
+- Pairing code/port and connect port are different values.

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1300" viewBox="0 0 900 1300" role="img" aria-labelledby="title desc">
+  <title id="title">Wireless debugging pairing popup value map</title>
+  <desc id="desc">A sanitized Android pairing dialog showing pairing IP address, pairing port, and six digit code.</desc>
+  <rect width="900" height="1300" fill="#050505"/>
+  <rect x="70" y="255" width="760" height="790" rx="44" fill="#242424"/>
+  <text x="116" y="342" fill="#f8fafc" font-family="Arial, sans-serif" font-size="46">Pair with device</text>
+  <text x="116" y="420" fill="#a5a5a5" font-family="Arial, sans-serif" font-size="27">Use this pairing code and address</text>
+
+  <rect x="116" y="492" width="668" height="132" rx="22" fill="#111827"/>
+  <text x="148" y="548" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="25">Wi-Fi pairing code</text>
+  <text x="148" y="600" fill="#ffffff" font-family="Arial, sans-serif" font-size="47" letter-spacing="6">123456</text>
+
+  <rect x="116" y="676" width="668" height="132" rx="22" fill="#111827"/>
+  <text x="148" y="732" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="25">IP address and port</text>
+  <text x="148" y="784" fill="#ffffff" font-family="Arial, sans-serif" font-size="39">192.168.137.42:43123</text>
+
+  <rect x="530" y="888" width="188" height="74" rx="24" fill="#2f7df6"/>
+  <text x="580" y="936" fill="#ffffff" font-family="Arial, sans-serif" font-size="30">Pair</text>
+
+  <path d="M420 584 C640 584 650 584 790 584" stroke="#34d399" stroke-width="6" fill="none"/>
+  <polygon points="790,584 764,568 764,600" fill="#34d399"/>
+  <rect x="430" y="460" width="370" height="84" rx="18" fill="#063d2a" stroke="#34d399" stroke-width="3"/>
+  <text x="452" y="496" fill="#d1fae5" font-family="Arial, sans-serif" font-size="24">SIX_DIGIT_CODE</text>
+  <text x="452" y="528" fill="#d1fae5" font-family="Arial, sans-serif" font-size="20">Use with adb pair</text>
+
+  <path d="M510 770 C662 770 682 770 792 770" stroke="#ffcc33" stroke-width="6" fill="none"/>
+  <polygon points="792,770 766,754 766,786" fill="#ffcc33"/>
+  <rect x="428" y="816" width="374" height="90" rx="18" fill="#3b2f00" stroke="#ffcc33" stroke-width="3"/>
+  <text x="450" y="854" fill="#fff7d6" font-family="Arial, sans-serif" font-size="24">PAIRING_IP:PAIR_PORT</text>
+  <text x="450" y="886" fill="#fff7d6" font-family="Arial, sans-serif" font-size="20">Temporary. Do not use with adb connect.</text>
+</svg>

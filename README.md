@@ -44,6 +44,76 @@ To install my APK, run:
 .\work\android\platform-tools\adb.exe -s <ADB_SERIAL> install -r "C:\path\to\app.apk"
 ```
 
+## Value Decoder: What Each Placeholder Means
+
+Wireless ADB has two different screens and two different ports. Most failures happen because the pairing port is mistaken for the connect port.
+
+### Pairing Popup Values
+
+![Annotated pairing popup](assets/wireless-debugging-pairing.svg)
+
+When you tap **Pair device with pairing code**, Android shows:
+
+- `SIX_DIGIT_CODE`: the six-digit number, for example `123456`.
+- `PAIRING_IP:PAIR_PORT`: the temporary pairing address, for example `192.168.137.42:43123`.
+
+Use these only with:
+
+```powershell
+adb pair <PAIRING_IP>:<PAIR_PORT> <SIX_DIGIT_CODE>
+```
+
+Do **not** use the pairing port with `adb connect`.
+
+### Main Wireless Debugging Screen Values
+
+![Annotated main Wireless debugging screen](assets/wireless-debugging-main.svg)
+
+After pairing, close the pairing popup and return to the main **Wireless debugging** screen.
+
+The line labeled **IP address and port** should show:
+
+```text
+<CONNECT_IP>:<CONNECT_PORT>
+```
+
+Use that with:
+
+```powershell
+adb connect <CONNECT_IP>:<CONNECT_PORT>
+```
+
+If the screen shows only an IP with no `:port`, the ADB connect listener is not active yet. Toggle Wireless debugging off/on, reconnect Wi-Fi, or follow the Wi-Fi Direct AP + ICS flow below.
+
+### Network Topology
+
+![Wireless ADB rescue topology](assets/topology.svg)
+
+Common placeholders:
+
+| Placeholder | Meaning | How to find it |
+|---|---|---|
+| `<PAIRING_IP>:<PAIR_PORT>` | Temporary endpoint from the pairing popup | Phone -> Wireless debugging -> Pair device with pairing code |
+| `<SIX_DIGIT_CODE>` | Temporary six-digit pairing code | Same pairing popup |
+| `<CONNECT_IP>:<CONNECT_PORT>` | Actual ADB connection endpoint | Main Wireless debugging screen, or `adb mdns services` as `_adb-tls-connect._tcp` |
+| `<PHONE_HOTSPOT_GATEWAY>` | Phone's hotspot-side IP as seen by Windows | `Get-NetIPConfiguration -InterfaceAlias 'Wi-Fi'` -> `IPv4DefaultGateway` |
+| `<LAPTOP_WIFI_IP>` | Laptop's IP on the phone hotspot | `Get-NetIPConfiguration -InterfaceAlias 'Wi-Fi'` -> `IPv4Address` |
+| `<ADB_SERIAL>` | Device identifier shown by ADB | `adb devices -l` |
+
+Example mDNS output:
+
+```text
+adb-xxxx  _adb-tls-pairing._tcp  192.168.137.42:43123
+adb-xxxx  _adb-tls-connect._tcp  192.168.137.42:45678
+```
+
+Correct commands for that example:
+
+```powershell
+adb pair 192.168.137.42:43123 123456
+adb connect 192.168.137.42:45678
+```
+
 ## Install Platform Tools
 
 ```powershell
