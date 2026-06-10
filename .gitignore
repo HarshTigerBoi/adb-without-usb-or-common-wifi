@@ -1,0 +1,9 @@
+work/
+*.log
+*.zip
+*.apk
+*.apks
+*.aab
+.DS_Store
+Thumbs.db
+
