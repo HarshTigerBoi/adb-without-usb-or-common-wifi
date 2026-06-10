@@ -2,80 +2,35 @@
 
 Use this when you want Android ADB without USB cable/data and without a common Wi-Fi router.
 
-This works for normal ADB workflows:
+## One Linear Process
 
-- install APKs with `adb install`
-- open a shell with `adb shell`
-- read logs with `adb logcat`
-- use tools that depend on ADB after the device appears as `device`
+1. Download this repo as ZIP and extract it.
+2. Open the extracted folder.
+3. Double-click `START_HERE.cmd`.
+4. If installing an APK, drag the APK onto `START_HERE.cmd` instead of double-clicking it.
+5. If the wizard asks to download Android platform-tools, press Enter for yes.
+6. Keep the second PowerShell window open if it appears.
+7. Connect the phone Wi-Fi to the network shown by the wizard.
+8. If Android says no internet, choose **Stay connected** or **Use this network anyway**.
+9. In the wizard, press Enter after the phone is connected.
+10. If asked to enable Windows Internet Connection Sharing, press Enter for yes.
+11. On the phone, open Developer options -> Wireless debugging.
+12. Tap **Pair device with pairing code**.
+13. Keep the pairing popup open.
+14. If asked for the pairing IP and port, copy it from the pairing popup.
+15. Enter the six-digit pairing code into the wizard.
+16. After pairing, close the pairing popup.
+17. Stay on the main Wireless debugging screen.
+18. If asked for the connect IP and port, copy it from the main Wireless debugging screen.
+19. Press Enter for yes when asked to switch to TCP port `5555`.
+20. Success means `adb devices -l` shows the phone as `device`.
 
-Once `adb devices` shows the phone as `device`, this is a normal ADB connection. Any app or tool that knows how to use ADB can use this device.
-
-It is not tied to any AI tool, editor, or app. It is just Android Wireless debugging plus a laptop-created Wi-Fi Direct network.
-
-## Easiest Path
-
-Download or clone this repo on a Windows laptop, then double-click:
-
-```text
-START_HERE.cmd
-```
-
-To install an APK at the end, drag the APK file onto `START_HERE.cmd`.
-
-You can also open PowerShell in this repository and run:
-
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\run-adb-rescue-wizard.ps1
-```
-
-To install an APK at the end:
-
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\run-adb-rescue-wizard.ps1 -ApkPath "C:\path\to\app.apk"
-```
-
-The wizard will:
-
-1. Find or download Android platform-tools.
-2. Start a laptop-created Wi-Fi Direct network.
-3. Tell you what Wi-Fi network to join from the phone.
-4. Optionally enable Windows Internet Connection Sharing.
-5. Help pair Android Wireless debugging.
-6. Connect to the real Wireless debugging connect port.
-7. Optionally switch to easier reconnects on TCP port `5555`.
-8. Optionally install an APK.
-
-## Minimum Requirements
-
-- Windows 10/11 laptop with Wi-Fi Direct support.
-- Android 11+ phone with Developer options.
-- Wireless debugging enabled on the phone.
-- Phone and laptop must be able to reach each other on a local network.
-- Pairing code/port and connect port must be treated as different values.
-
-## Manual Commands After Setup
-
-Check devices:
-
-```powershell
-.\work\android\platform-tools\adb.exe devices -l
-```
-
-Connect to a saved `:5555` target:
-
-```powershell
-.\work\android\platform-tools\adb.exe connect <PHONE_IP_OR_GATEWAY>:5555
-```
-
-Install an APK:
-
-```powershell
-.\work\android\platform-tools\adb.exe -s <ADB_SERIAL> install -r "C:\path\to\app.apk"
-```
-
-If only one device is connected:
+After success, use normal ADB commands:
 
 ```powershell
 .\work\android\platform-tools\adb.exe install -r "C:\path\to\app.apk"
+.\work\android\platform-tools\adb.exe shell
+.\work\android\platform-tools\adb.exe logcat
 ```
+
+For screenshots, value meanings, manual commands, and troubleshooting, read [GUIDE.md](GUIDE.md).
