@@ -85,6 +85,37 @@ Follow these steps in order. Do not jump around unless a step tells you to. If y
 
 After that, this is normal ADB. Any app or tool that uses ADB can use the device.
 
+## Phone Screen Cheat Sheet
+
+Use this only when the wizard asks for a code, IP address, or port.
+
+### Pairing Popup
+
+![Pairing popup values](assets/wireless-debugging-pairing.svg)
+
+This screen appears after tapping **Pair device with pairing code**.
+
+- The six-digit number looks like `123456`.
+- The pairing address looks like `192.168.137.42:43123`.
+- Use this address only when the wizard asks for `PAIRING_IP:PAIR_PORT`.
+
+### Main Wireless Debugging Screen
+
+![Main Wireless debugging values](assets/wireless-debugging-main.svg)
+
+This is the normal Wireless debugging screen after pairing.
+
+- The connect address looks like `192.168.137.42:45678`.
+- Use this address only when the wizard asks for `CONNECT_IP:CONNECT_PORT`.
+- Do not reuse the pairing popup port here.
+
+Quick rule:
+
+```text
+Pairing popup = pairing code and pairing port.
+Main Wireless debugging screen = connect port.
+```
+
 ## After It Works
 
 Install an APK:
