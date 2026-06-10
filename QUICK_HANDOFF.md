@@ -3,11 +3,11 @@
 Copy this into another Codex chat:
 
 ```text
-My Android phone USB data path is broken, but wireless ADB was made to work before.
+I want Android ADB without USB cable/data and without a shared Wi-Fi router. Wireless ADB was made to work before using a Windows Wi-Fi Direct AP and then classic TCP ADB on port 5555.
 
 Please do not disconnect my laptop from the phone hotspot unless I explicitly say so.
 
-This is "ADB without USB data" and "without an external Wi-Fi router", not literally without Wi-Fi. Wireless ADB still needs a local network path.
+This is "ADB without USB cable/data" and "without an external/shared Wi-Fi router", not literally without Wi-Fi. Wireless ADB still needs a local network path.
 
 First check:
 .\work\android\platform-tools\adb.exe devices -l

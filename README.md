@@ -1,37 +1,61 @@
-# Android Wireless ADB Rescue
+# Android Wireless ADB Without USB or a Shared Wi-Fi Router
 
-Use this when an Android phone only charges over USB, USB ADB does not enumerate, and you still need `adb install`, `logcat`, or shell access.
+Use Android `adb install`, `adb shell`, and `logcat` when you **do not have a usable USB data cable** and **do not have a common Wi-Fi/router** for both devices.
 
-This workaround is for a Windows laptop and an Android phone with **Wireless debugging**. It creates a second local Wi-Fi path from the laptop using Windows Wi-Fi Direct Legacy AP, pairs Wireless ADB over that path, then switches ADB to classic TCP port `5555` for easier reconnects.
+The setup uses only what many people already have:
+
+- one Windows laptop
+- one Android phone
+- the phone's hotspot for laptop internet, if needed
+- a laptop-created Wi-Fi Direct network for Android Wireless debugging
+
+After the first Wireless ADB connection works, the phone can be switched to classic TCP ADB on port `5555` for easier reconnects.
+
+## Core Idea
+
+Android Wireless debugging needs a network path. Usually that means both devices are on the same home/router Wi-Fi. If you do not have that, Windows can create a local Wi-Fi Direct Legacy AP. The phone joins that AP, the laptop pairs with Android Wireless debugging, and then ADB works without USB data.
+
+This is best described as:
+
+```text
+ADB without USB cable/data and without a shared Wi-Fi router.
+```
+
+It is not literally "ADB without Wi-Fi"; it creates a tiny local Wi-Fi network from the laptop.
 
 ## What to Call This
 
 Useful search phrases:
 
+- ADB without USB cable
 - ADB without USB data
-- Android debugging when USB only charges
+- ADB without common Wi-Fi
 - Wireless ADB without external Wi-Fi
 - Android wireless debugging without router
 - ADB install without USB cable
 - Windows Wi-Fi Direct ADB bridge
-- Fix `USB\VID_0000&PID_0001` for ADB workflow
+- Android debugging using phone hotspot and laptop Wi-Fi
 
-Important wording: this is **not ADB without any Wi-Fi at all**. ADB still needs a network path. The trick is that you do not need a home router, public Wi-Fi, or working USB data. The Windows laptop creates a local Wi-Fi Direct AP, and the phone connects to that.
+Important wording: this is **not ADB without any Wi-Fi radio at all**. ADB still needs a network path. The trick is that you do not need a home router, public Wi-Fi, or working USB data. The Windows laptop creates a local Wi-Fi Direct AP, and the phone connects to that.
 
 ## When This Helps
 
-- USB only charges, but no file transfer / MTP / ADB appears.
-- Windows shows errors such as:
-  - `Unknown USB Device (Port Reset Failed)`
-  - `USB\VID_0000&PID_0001`
-  - `Device Descriptor Request Failed`
-- Another phone works on the same laptop, so the laptop USB stack is probably fine.
-- Wireless debugging pairs, but `adb connect` fails because the phone does not show or expose a connect port.
-- Your laptop depends on the phone hotspot for internet, which makes the usual "same Wi-Fi network" requirement awkward.
+- You do not want to use a USB cable.
+- You have no USB data cable, only charging cables.
+- Your phone's USB data path is broken, flaky, or inconvenient.
+- You do not have a common Wi-Fi network/router for both laptop and phone.
+- The laptop is using the phone hotspot for internet, so the phone is the hotspot host instead of a normal Wi-Fi client.
+- Wireless debugging pairs but `adb connect` fails because the phone does not expose a reachable connect port.
+
+Also useful when Windows shows USB errors such as:
+
+- `Unknown USB Device (Port Reset Failed)`
+- `USB\VID_0000&PID_0001`
+- `Device Descriptor Request Failed`
 
 ## What This Does Not Do
 
-- It does not debug over "nothing"; it uses a local Wi-Fi Direct network.
+- It does not debug over "nothing"; it uses a local Wi-Fi Direct network made by the laptop.
 - It does not repair a broken USB-C port or charging board.
 - It does not bypass Android security. Wireless debugging must be enabled and paired by the phone owner.
 - It does not let a normal Android app silently install/debug other apps.
@@ -44,14 +68,14 @@ Important wording: this is **not ADB without any Wi-Fi at all**. ADB still needs
 - The phone must be able to join a Wi-Fi network created by the laptop.
 - The laptop and phone must have at least one reachable local network path.
 
-This does **not** fix broken USB hardware. It bypasses USB data by using Wireless ADB.
+This bypasses USB data by using Wireless ADB. It can help whether USB is broken, unavailable, or simply not desired.
 
 ## Fast Path for Future Codex Chats
 
 Paste this into another Codex chat:
 
 ```text
-I have a Windows laptop and an Android phone whose USB data path is broken. Wireless ADB was previously made to work by creating a Windows Wi-Fi Direct Legacy AP, pairing Android Wireless debugging, then switching ADB to TCP port 5555.
+I have a Windows laptop and an Android phone. I want ADB without USB cable/data and without a shared Wi-Fi router. Wireless ADB was previously made to work by creating a Windows Wi-Fi Direct Legacy AP, pairing Android Wireless debugging, then switching ADB to TCP port 5555.
 
 Please first check:
 .\work\android\platform-tools\adb.exe devices -l
