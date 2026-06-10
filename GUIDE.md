@@ -74,7 +74,7 @@ If the screen shows only an IP with no `:port`, the ADB connect listener is not 
 
 ## Network Topology
 
-![Wireless ADB rescue topology](assets/topology.svg)
+![Wireless ADB topology](assets/topology.svg)
 
 Common placeholders:
 

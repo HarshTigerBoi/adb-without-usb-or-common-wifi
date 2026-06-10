@@ -116,7 +116,7 @@ function Get-DefaultGatewayEndpoint {
   return $null
 }
 
-Write-Section 'Android Wireless ADB Rescue Wizard'
+Write-Section 'ADB Without USB or Common Wi-Fi Wizard'
 Write-Host 'Goal: ADB without USB cable/data and without a common Wi-Fi router.'
 Write-Host 'This still uses Wi-Fi: the laptop creates a small local Wi-Fi Direct network.'
 

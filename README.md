@@ -1,4 +1,4 @@
-# Android Wireless ADB Without USB or a Common Wi-Fi Router
+# ADB Without USB or a Common Wi-Fi Router
 
 Use Android ADB when you do not have USB data and both devices are not on the same Wi-Fi router.
 

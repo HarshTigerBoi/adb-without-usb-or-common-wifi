@@ -14,9 +14,9 @@ echo You can also drag an APK file onto START_HERE.cmd to install it at the end.
 echo.
 
 if "%~1"=="" (
-  powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\run-adb-rescue-wizard.ps1"
+  powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\setup-adb-without-usb.ps1"
 ) else (
-  powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\run-adb-rescue-wizard.ps1" -ApkPath "%~1"
+  powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\setup-adb-without-usb.ps1" -ApkPath "%~1"
 )
 
 echo.
