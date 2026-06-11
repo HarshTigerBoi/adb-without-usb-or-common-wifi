@@ -39,13 +39,13 @@ Follow these steps in order. Do not jump around unless a step tells you to. If y
 
 5. A PowerShell wizard will open. If it asks to download Android platform-tools, press Enter for yes.
 
-6. The wizard will start a laptop-created Wi-Fi network. A second PowerShell window may open. Keep it open.
+6. The wizard first tries to reuse an existing ADB connection. If that fails, it will start a laptop-created Wi-Fi network. A second PowerShell window may open. Keep it open.
 
-7. The wizard will show a Wi-Fi name and password. On the phone, connect Wi-Fi to that network.
+7. If the wizard shows a Wi-Fi name and password, connect the phone Wi-Fi to that network.
 
 8. If the phone says the Wi-Fi has no internet, choose **Stay connected** or **Use this network anyway**.
 
-9. In the wizard, press Enter after the phone is connected to the laptop-created Wi-Fi.
+9. If the wizard asks, press Enter after the phone is connected to the laptop-created Wi-Fi.
 
 10. If the wizard asks to enable Windows Internet Connection Sharing, press Enter for yes on the first try. Approve the Windows admin prompt if it appears.
 
@@ -84,6 +84,21 @@ Follow these steps in order. Do not jump around unless a step tells you to. If y
     ```
 
 After that, this is normal ADB. Any app or tool that uses ADB can use the device.
+
+## Using It Again Later
+
+Run `START_HERE.cmd` again.
+
+The wizard will first try:
+
+- any phone that is already connected through ADB
+- the last stable TCP ADB endpoint that worked
+- the phone hotspot gateway stable TCP ADB endpoint
+- the current Wireless debugging connect endpoint, if Android advertises one
+
+If all of those are closed, the phone is not listening for ADB even if **Wireless debugging** is still toggled on. That is normal on many phones after rebooting, changing networks, toggling Wireless debugging, or waiting too long.
+
+Fix it by continuing through the wizard and pairing again. The saved paired-device name on Android means the laptop is trusted; it does not guarantee that a live ADB port is open.
 
 ## Phone Screen Cheat Sheet
 

@@ -18,6 +18,28 @@ ADB without USB cable/data and without a common Wi-Fi router.
 
 This is not ADB without any Wi-Fi radio. It still uses Wi-Fi, but the laptop creates the local network.
 
+## Why It May Stop Working Later
+
+Wireless debugging has three separate things:
+
+| Layer | What it means |
+|---|---|
+| Wireless debugging toggle | Android is allowed to use wireless ADB |
+| Paired device entry | Android trusts that laptop |
+| Live ADB listener | Android is currently accepting ADB connections on an IP address and port |
+
+The first two can still be present while the third one is closed. That is why a phone can show Wireless debugging as enabled and still reject `adb connect`.
+
+Common causes:
+
+- the phone rebooted
+- Wireless debugging was toggled
+- Wi-Fi or hotspot state changed
+- Android killed or restarted the debugging listener
+- the previous temporary connect port expired
+
+The fix is simple: run `START_HERE.cmd` again. The wizard first tries to reconnect automatically. If Android is not listening anymore, continue through pairing again and switch back to stable TCP ADB mode.
+
 ## What to Call This
 
 Useful search phrases:
