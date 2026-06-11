@@ -16,7 +16,7 @@
   <rect x="410" y="365" width="300" height="190" rx="22" fill="#111827" stroke="#34d399" stroke-width="3"/>
   <text x="456" y="425" fill="#d1fae5" font-family="Arial, sans-serif" font-size="32">Wi-Fi Direct AP</text>
   <text x="456" y="474" fill="#a7f3d0" font-family="Arial, sans-serif" font-size="22">SSID: ADBBridge</text>
-  <text x="456" y="508" fill="#f8fafc" font-family="Arial, sans-serif" font-size="24">AP IP: 192.168.137.1</text>
+  <text x="456" y="508" fill="#f8fafc" font-family="Arial, sans-serif" font-size="24">AP IP: XXX.XXX.XXX.XXX</text>
 
   <path d="M350 180 L730 180" stroke="#38bdf8" stroke-width="6" fill="none"/>
   <polygon points="730,180 702,164 702,196" fill="#38bdf8"/>

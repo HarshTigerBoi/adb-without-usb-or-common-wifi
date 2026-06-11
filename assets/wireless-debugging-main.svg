@@ -13,7 +13,7 @@
   <text x="86" y="400" fill="#f8fafc" font-family="Arial, sans-serif" font-size="34">Device name</text>
   <text x="86" y="446" fill="#a5a5a5" font-family="Arial, sans-serif" font-size="28">Android phone</text>
   <text x="86" y="542" fill="#f8fafc" font-family="Arial, sans-serif" font-size="34">IP address and port</text>
-  <text x="86" y="590" fill="#a5a5a5" font-family="Arial, sans-serif" font-size="31">192.168.137.42:45678</text>
+  <text x="86" y="590" fill="#a5a5a5" font-family="Arial, sans-serif" font-size="31">XXX.XXX.XXX.XXX:XXXXX</text>
 
   <rect x="48" y="646" width="804" height="272" rx="34" fill="#242424"/>
   <text x="86" y="710" fill="#f8fafc" font-family="Arial, sans-serif" font-size="34">Pair device with QR code</text>

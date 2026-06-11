@@ -8,11 +8,11 @@
 
   <rect x="116" y="492" width="668" height="132" rx="22" fill="#111827"/>
   <text x="148" y="548" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="25">Wi-Fi pairing code</text>
-  <text x="148" y="600" fill="#ffffff" font-family="Arial, sans-serif" font-size="47" letter-spacing="6">123456</text>
+  <text x="148" y="600" fill="#ffffff" font-family="Arial, sans-serif" font-size="47" letter-spacing="6">XXXXXX</text>
 
   <rect x="116" y="676" width="668" height="132" rx="22" fill="#111827"/>
   <text x="148" y="732" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="25">IP address and port</text>
-  <text x="148" y="784" fill="#ffffff" font-family="Arial, sans-serif" font-size="39">192.168.137.42:43123</text>
+  <text x="148" y="784" fill="#ffffff" font-family="Arial, sans-serif" font-size="39">XXX.XXX.XXX.XXX:XXXXX</text>
 
   <rect x="530" y="888" width="188" height="74" rx="24" fill="#2f7df6"/>
   <text x="580" y="936" fill="#ffffff" font-family="Arial, sans-serif" font-size="30">Pair</text>

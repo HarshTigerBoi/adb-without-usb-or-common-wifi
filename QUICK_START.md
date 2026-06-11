@@ -22,7 +22,7 @@ Use this when you want Android ADB without USB cable/data and without a common W
 16. After pairing, close the pairing popup.
 17. Stay on the main Wireless debugging screen.
 18. If asked for the connect IP and port, copy it from the main Wireless debugging screen.
-19. Press Enter for yes when asked to switch to TCP port `5555`.
+19. Press Enter for yes when asked to switch to stable TCP ADB mode.
 20. Success means `adb devices -l` shows the phone as `device`.
 
 After success, use normal ADB commands:

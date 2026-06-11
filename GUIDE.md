@@ -8,7 +8,7 @@ Use it only when you want to understand the setup, run the manual commands, or d
 
 Android Wireless debugging needs a network path. Usually that means the laptop and phone are both connected to the same home Wi-Fi router.
 
-If there is no common Wi-Fi router, Windows can create a small local Wi-Fi Direct Legacy AP. The phone joins that laptop-created network. The laptop pairs with Android Wireless debugging over that path. After ADB connects once, the phone can be switched to classic TCP ADB on port `5555` for easier reconnects.
+If there is no common Wi-Fi router, Windows can create a small local Wi-Fi Direct Legacy AP. The phone joins that laptop-created network. The laptop pairs with Android Wireless debugging over that path. After ADB connects once, the phone can be switched to classic TCP ADB for easier reconnects.
 
 Best short description:
 
@@ -41,8 +41,8 @@ Wireless ADB has two different screens and two different ports. Most failures ha
 
 When you tap **Pair device with pairing code**, Android shows:
 
-- `SIX_DIGIT_CODE`: the six-digit number, for example `123456`.
-- `PAIRING_IP:PAIR_PORT`: the temporary pairing address, for example `192.168.137.42:43123`.
+- `SIX_DIGIT_CODE`: the six-digit number, shown here as `XXXXXX`.
+- `PAIRING_IP:PAIR_PORT`: the temporary pairing address, shown here as `XXX.XXX.XXX.XXX:XXXXX`.
 
 Use these only with:
 
@@ -85,20 +85,21 @@ Common placeholders:
 | `<CONNECT_IP>:<CONNECT_PORT>` | Actual ADB connection endpoint | Main Wireless debugging screen, or `adb mdns services` as `_adb-tls-connect._tcp` |
 | `<PHONE_HOTSPOT_GATEWAY>` | Phone's hotspot-side IP as seen by Windows | `Get-NetIPConfiguration -InterfaceAlias 'Wi-Fi'` -> `IPv4DefaultGateway` |
 | `<LAPTOP_WIFI_IP>` | Laptop's IP on the phone hotspot | `Get-NetIPConfiguration -InterfaceAlias 'Wi-Fi'` -> `IPv4Address` |
+| `<STABLE_TCP_PORT>` | Stable TCP ADB port selected by the wizard | The wizard prints this value after switching modes |
 | `<ADB_SERIAL>` | Device identifier shown by ADB | `adb devices -l` |
 
 Example mDNS output:
 
 ```text
-adb-xxxx  _adb-tls-pairing._tcp  192.168.137.42:43123
-adb-xxxx  _adb-tls-connect._tcp  192.168.137.42:45678
+adb-xxxx  _adb-tls-pairing._tcp  XXX.XXX.XXX.XXX:XXXXX
+adb-xxxx  _adb-tls-connect._tcp  XXX.XXX.XXX.XXX:XXXXX
 ```
 
 Correct commands for that example:
 
 ```powershell
-adb pair 192.168.137.42:43123 123456
-adb connect 192.168.137.42:45678
+adb pair XXX.XXX.XXX.XXX:XXXXX XXXXXX
+adb connect XXX.XXX.XXX.XXX:XXXXX
 ```
 
 ## Manual Flow
@@ -125,7 +126,7 @@ Defaults:
 ```text
 SSID: ADBBridge
 Password: ChangeMe123!
-Laptop AP IP: usually 192.168.137.1
+Laptop AP IP: shown by Windows for the created adapter
 ```
 
 Keep this PowerShell process running.
@@ -208,18 +209,18 @@ Expected:
 <CONNECT_IP>:<CONNECT_PORT>    device ...
 ```
 
-### Make Reconnect Easy with Port 5555
+### Make Reconnect Easy with Stable TCP ADB
 
 Once connected, switch to classic TCP mode:
 
 ```powershell
-.\work\android\platform-tools\adb.exe -s <CONNECT_IP>:<CONNECT_PORT> tcpip 5555
+.\work\android\platform-tools\adb.exe -s <CONNECT_IP>:<CONNECT_PORT> tcpip <STABLE_TCP_PORT>
 ```
 
 Reconnect:
 
 ```powershell
-.\work\android\platform-tools\adb.exe connect <PHONE_IP_OR_GATEWAY>:5555
+.\work\android\platform-tools\adb.exe connect <PHONE_IP_OR_GATEWAY>:<STABLE_TCP_PORT>
 .\work\android\platform-tools\adb.exe devices -l
 ```
 
@@ -227,7 +228,7 @@ If duplicate transports appear:
 
 ```powershell
 .\work\android\platform-tools\adb.exe disconnect
-.\work\android\platform-tools\adb.exe connect <PHONE_IP_OR_GATEWAY>:5555
+.\work\android\platform-tools\adb.exe connect <PHONE_IP_OR_GATEWAY>:<STABLE_TCP_PORT>
 ```
 
 ## Troubleshooting
@@ -288,7 +289,7 @@ Then install:
 - Wireless debugging must be allowed by the phone OS.
 - An ordinary Android app cannot enable ADB or install other apps silently.
 - This does not repair USB-C data pins or damaged charging hardware.
-- Port `5555` ADB may stop after reboot, toggling Wireless debugging, or changing networks.
+- Stable TCP ADB may stop after reboot, toggling Wireless debugging, or changing networks.
 - Pairing ports are temporary and are not connect ports.
 - Do not run `adb connect` against the pairing port; it can create stale `offline` devices.
 - Some OEM skins require a real Wi-Fi client connection before Wireless debugging opens the connect socket.
@@ -300,4 +301,4 @@ Wireless debugging has two stages:
 1. Pair with a temporary pairing endpoint.
 2. Connect to a separate TLS ADB endpoint.
 
-Some phones expose the pairing endpoint but fail to expose the connect endpoint when the phone is acting as the hotspot. Creating a laptop Wi-Fi Direct Legacy AP gives the phone a client Wi-Fi path. Sharing internet into that AP can make the phone treat it as a normal usable Wi-Fi network. Once Wireless ADB connects once, switching to classic TCP `5555` makes future reconnects much easier.
+Some phones expose the pairing endpoint but fail to expose the connect endpoint when the phone is acting as the hotspot. Creating a laptop Wi-Fi Direct Legacy AP gives the phone a client Wi-Fi path. Sharing internet into that AP can make the phone treat it as a normal usable Wi-Fi network. Once Wireless ADB connects once, switching to stable classic TCP mode makes future reconnects much easier.

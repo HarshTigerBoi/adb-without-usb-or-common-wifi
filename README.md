@@ -73,14 +73,14 @@ Follow these steps in order. Do not jump around unless a step tells you to. If y
 
 18. If the wizard asks for `CONNECT_IP:CONNECT_PORT`, use the **IP address and port** line from the main Wireless debugging screen. Do not reuse the pairing popup port.
 
-19. When the wizard asks whether to switch to TCP port `5555`, press Enter for yes.
+19. When the wizard asks whether to switch to stable TCP ADB mode, press Enter for yes.
 
 20. If you dragged an APK onto `START_HERE.cmd`, the wizard will try to install it.
 
 21. The wizard will print the ADB device list. Success means the phone appears as `device`, like this:
 
     ```text
-    192.168.x.x:5555    device
+    XXX.XXX.X.X:XXXXX    device
     ```
 
 After that, this is normal ADB. Any app or tool that uses ADB can use the device.
@@ -95,8 +95,8 @@ Use this only when the wizard asks for a code, IP address, or port.
 
 This screen appears after tapping **Pair device with pairing code**.
 
-- The six-digit number looks like `123456`.
-- The pairing address looks like `192.168.137.42:43123`.
+- The six-digit number looks like `XXXXXX`.
+- The pairing address looks like `XXX.XXX.XXX.XXX:XXXXX`.
 - Use this address only when the wizard asks for `PAIRING_IP:PAIR_PORT`.
 
 ### Main Wireless Debugging Screen
@@ -105,7 +105,7 @@ This screen appears after tapping **Pair device with pairing code**.
 
 This is the normal Wireless debugging screen after pairing.
 
-- The connect address looks like `192.168.137.42:45678`.
+- The connect address looks like `XXX.XXX.XXX.XXX:XXXXX`.
 - Use this address only when the wizard asks for `CONNECT_IP:CONNECT_PORT`.
 - Do not reuse the pairing popup port here.
 
@@ -136,10 +136,10 @@ Read logs:
 .\work\android\platform-tools\adb.exe logcat
 ```
 
-Reconnect later if `:5555` is still active:
+Reconnect later if stable TCP ADB mode is still active:
 
 ```powershell
-.\work\android\platform-tools\adb.exe connect <PHONE_IP_OR_GATEWAY>:5555
+.\work\android\platform-tools\adb.exe connect <PHONE_IP_OR_GATEWAY>:<STABLE_TCP_PORT>
 ```
 
 ## If It Fails
